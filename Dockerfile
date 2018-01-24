@@ -1,0 +1,18 @@
+FROM rust:1.23.0
+WORKDIR /usr/src/myapp/parity
+RUN apt-get update && apt-get install -y apt-utils && apt-get install -y \
+	openssl \
+	libssl-dev \
+	libudev-dev && \
+	rm -rf /var/lib/apt/lists/*
+RUN cd .. && \
+	git init && \
+	git clone https://github.com/mira-lab/parity && \
+	cd parity &&\
+	cargo build --features secretstore --release && \
+	cp target/release/parity /usr/local/bin/ && \
+	rm -rf /usr/src/myapp/parity
+RUN chmod +x /usr/local/bin/parity
+EXPOSE 8080 8045 8545 8180
+ENTRYPOINT ["/usr/local/bin/parity"]
+
