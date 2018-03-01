@@ -14,8 +14,6 @@ RUN cd .. && \
 	rm -rf /usr/src/myapp/parity
 RUN chmod +x /usr/local/bin/parity
 EXPOSE 8045 8080 8082 8085 8545 30303
-ENTRYPOINT ["/usr/local/bin/parity", 
-	"--jsonrpc-interface all",
-	"--jsonrpc-cors all"]
+ENTRYPOINT ["/usr/local/bin/parity", "--jsonrpc-interface all",	"--jsonrpc-cors all"]
 
 
